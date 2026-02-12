@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - RentEase</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <h1>RentEase Admin</h1>
+  <a href="products.html">View Products</a>
+</div>
+
+<div class="admin-box">
+  <h2>Add Product</h2>
+
+  <input id="name" placeholder="Product Name">
+  <input id="category" placeholder="Category">
+  <input id="rent" placeholder="Monthly Rent">
+  <input id="deposit" placeholder="Security Deposit">
+  <input id="tenure" placeholder="Tenure (e.g. 3,6,12)">
+
+  <button onclick="addProduct()">Add Product</button>
+</div>
+
+<script>
+function addProduct() {
+  fetch("http://localhost:3000/products/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: name.value,
+      category: category.value,
+      monthlyRent: rent.value,
+      deposit: deposit.value,
+      tenureOptions: tenure.value.split(","),
+      available: true
+    })
+  })
+  .then(res => res.json())
+  .then(data => alert(data.message));
+}
+</script>
+
+</body>
+</html>

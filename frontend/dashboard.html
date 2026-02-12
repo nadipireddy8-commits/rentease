@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - RentEase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .rental-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        .cancel-btn {
+
+          background: #e74c3c;
+          margin-left: 10px;
+        }
+
+        .cancel-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>RentEase</h1>
+    <div>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Logout</a>
+    </div>
+</div>
+<div class="container">
+  <div class="section-title"> My Active Rentals</div>
+  
+  <div id="rentalList"></div>
+</div>
+
+
+
+<script>
+    // Get rentals from localStorage
+    let rentals = JSON.parse(localStorage.getItem("rentals")) || [];
+
+    let output = "";
+
+    if (rentals.length === 0) {
+        output = "<p>No active rentals found.</p>";
+    } else {
+        rentals.forEach((item, index) => {
+            output += `
+                <div class="card">
+                    <p><strong>Product:</strong> ${item.name}</p>
+                    <p><strong>Monthly Rent:</strong> ₹${item.price}</p>
+                    <button onclick="requestMaintenance(${index})">
+                        Request Maintenance
+                    </button>
+                    <button onclick="cancelRental(${index})">
+                        Cancel Rental
+                    </button>
+                </div>
+            `;
+        });
+    }
+
+    document.getElementById("rentalList").innerHTML = output;
+
+    // Maintenance function
+    function requestMaintenance(index) {
+        alert("Maintenance request sent for " + rentals[index].name);
+    }
+    
+    function cancelRental(index) {
+
+      rentals.splice(index, 1);
+      localStorage.setItem("rentals", JSON.stringify(rentals));
+      location.reload();
+    }
+  
+</script>
+
+</body>
+</html>
