@@ -5,16 +5,26 @@ function register() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  fetch("https://rentease-ox43.onrender.com//register", {
+  fetch("https://rentease-ox43.onrender.com/register", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({ username, password })
   })
-    .then(res => res.json())
-    .then(data => {
-      alert(data.message);
-      window.location.href = "login.html";
-    });
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("Registration successful");
+      window.location.href = "login.html"; // 👈 MANUAL redirect
+    } else {
+      alert(data.message || "Registration failed");
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Server error");
+  });
 }
 
 // =========================
