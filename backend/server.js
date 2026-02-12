@@ -23,7 +23,10 @@ app.use("/products", productRoutes);
 app.use("/rentals", rentalRoutes);
 app.use("/maintanance", maintananceRoutes);
 
-app.listen(3000, () => {
+
+const PORT=process.env.PORT || 3000;
+
+app.listen(PORT, () => {
   console.log("Server running on port 3000");
 });
 
