@@ -5,7 +5,7 @@ function register() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  fetch("http://localhost:3000/users/register", {
+  fetch("https://rentease-ox43.onrender.com//register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })
@@ -24,7 +24,7 @@ function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    fetch("http://localhost:3000/users/login", {
+    fetch("https://rentease-ox43.onrender.com//login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -54,7 +54,7 @@ function login() {
 // =========================
 if (window.location.pathname.includes("products.html")) {
 
-  fetch("http://localhost:3000/products")
+  fetch("https://rentease-ox43.onrender.com//products")
     .then(res => res.json())
     .then(data => {
 
